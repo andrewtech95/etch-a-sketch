@@ -1,23 +1,24 @@
+const DEFAULT_SIZE = 16; 
 const btn = document.querySelector('button');
 const container = document.querySelector('.container');
 
 btn.addEventListener('click', () => { 
-  let squaresNumberPerSide = prompt('Enter number of squares per side (max 100)');
-  if (squaresNumberPerSide === null) return;
-  else if (squaresNumberPerSide > 100 || squaresNumberPerSide < 0) alert('Invalid entry. Try again');
+  let size = prompt('Enter number of squares per side (max 100)');
+  if (size === null) return;
+  else if (size > 100 || size < 0) alert('Invalid entry. Try again');
   else {
     container.innerHTML = '';
-    newGrid(squaresNumberPerSide);
+    setupGrid(size);
   }  
 });
 
-function newGrid(snps) {
-  for (let i=0; i<snps**2; i++) {
-    const div = document.createElement('div');
-    div.style.cssText = `width: ${800/snps}px; height: ${800/snps}px;`;
-    div.addEventListener('mouseover', () => div.classList.add('color'));
-    container.appendChild(div);
+function setupGrid(size) {
+  for (let i=0; i<size**2; i++) {
+    const gridElement = document.createElement('div');
+    gridElement.style.cssText = `width: ${800/size}px; height: ${800/size}px;`;
+    gridElement.addEventListener('mousedown', () => gridElement.classList.add('color'));
+    container.appendChild(gridElement);
   }
 }
 
-newGrid(16);
+setupGrid(DEFAULT_SIZE);
